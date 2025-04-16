@@ -16,11 +16,14 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
   kafka:
+    bootstrap-servers: localhost:29092
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: localhost:29092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: onboardingConfirmation:com.credora.onboarding.notification.OnboardingNotificationRequest
+        spring.json.type.mapping: onboardingConfirmation:com.credora.onboarding.config.kafka.dto.OnboardingNotificationRequest
+    admin:
+      bootstrap-servers: localhost:29092
 server:
   port: 8010
