@@ -1,0 +1,25 @@
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: notification-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.type.mapping: onboardingConfirmation:com.credora.notification.config.kafka.dto.OnboardingNotificationRequest
+  mail:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    host: smtp.gmail.com
+    username: your-email@gmail.com
+    password: your-app-password
+    port: '587'
+server:
+  port: 8020

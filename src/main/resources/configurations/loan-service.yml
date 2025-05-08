@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/loan
+    username: credora
+    password: credora
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    baseline-description: "init"
+    baseline-version: 0
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      bootstrap-servers: localhost:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: loanApplication:com.credora.loan.config.kafka.dto.LoanApplicationNotificationRequest
+  #    admin:
+  #      bootstrap-servers: localhost:29092
+
+server:
+  port: 8030
+application:
+  config:
+    onboarding-url: http://localhost:8010/api/v1/
+
